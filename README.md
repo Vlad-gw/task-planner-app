@@ -13,6 +13,7 @@
 <a href="https://www.figma.com/"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10">Figma</a> </br>
 <a href="https://www.langchain.com/"><img src="https://i.ibb.co/x0hHg9L/langchain-icon.png" alt="" align="center" hspace="10">LangChain</a> </br>
 <a href="https://firebase.google.com/"><img src="https://i.ibb.co/m51pcGjz/firebase-icon.png" alt="" align="center" hspace=10>Firebase</a> </br>
+<a href="https://assistproject.atlassian.net/jira"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10">Jira</a> </br>
 <h2>Документация</h2>
 <ul>
   <li>Техническое задание<a href=""></a></li>
