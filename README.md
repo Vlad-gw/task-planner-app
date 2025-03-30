@@ -32,3 +32,14 @@
     <li><a href="https://www.figma.com/slides/EXWY9vpSEutWfmmiXnFBlo/Untitled?node-id=1-32&t=hxZWZDc2GPuP2EQb-0">Презентация технического задания Figma</a></li>
     <li><a href="https://rutube.ru/video/80b37bc3543881da589ceb3db90e9eba/?r=wd">Видеопрезентация технического задания Rutube </a></li>
 </ul>
+<h2>Чеклист</h2>
+<ul>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/Punctualis%20%D0%A7%D0%B5%D0%BA%D0%BB%D0%B8%D1%81%D1%82%201.pdf">Чеклист команды 7.3 pdf</a></li>
+</ul>
+<h2>Оценки от других команд</h2>
+<ul>
+    <li><a href="https://github.com/anya-ananasss/Defense-Discover/tree/main">Команда СК 2</a></li>
+    <li><a href="https://github.com/ReflectAppTP">Команда 5.3</a></li>
+    <li><a href="https://github.com/nmasalkin/Project-work">Команда 8.4</a></li>
+    <li><a href="https://github.com/ReflectAppTP">Команда 7.2</a></li>
+</ul>
