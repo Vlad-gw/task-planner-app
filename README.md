@@ -2,12 +2,12 @@
 
 </br>
 <h2>👥Команда</h2>
-<a href="https://github.com/DariaGudkova"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Дарья Гудкова</a> </br>
-<a href="https://github.com/SavvDima"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Дмитрий Саввинов</a> </br>
-<a href="https://github.com/Arleqquinn"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Александр Мирошников</a> </br>
-<a href="https://github.com/sgshn4"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Олег Переславцев</a> </br>
-<a href="https://github.com/Vlad-gw"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Владислав Гаврилов</a> </br>
-<a href="https://github.com/ASSkimos"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Максим Макаренко</a> </br>
+<a href="https://github.com/DariaGudkova"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Дарья Гудкова - Аналитик</a> </br>
+<a href="https://github.com/SavvDima"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Дмитрий Саввинов - PM & UI/UX design</a> </br>
+<a href="https://github.com/Arleqquinn"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Александр Мирошников - Backend & AI</a> </br>
+<a href="https://github.com/sgshn4"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Олег Переславцев - Backend & AI</a> </br>
+<a href="https://github.com/Vlad-gw"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Владислав Гаврилов - QA</a> </br>
+<a href="https://github.com/ASSkimos"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Максим Макаренко - Frontend</a> </br>
 <h2>📝Тема</h2>
 Персональный ассистент для планирования, анализа продуктивности и оптимизации времени
 <h2>⚙Сервисы</h2>
