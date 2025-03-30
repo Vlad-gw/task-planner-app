@@ -1,4 +1,4 @@
-# Android приложение Punctualis - Персональный ассистент с искуственным интелектом для планирования задач, анализа продуктивности и оптимизации времени
+# Android приложение Punctualis
 
 </br>
 <h2>👥Команда</h2>
@@ -9,7 +9,7 @@
 <a href="https://github.com/Vlad-gw"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Владислав Гаврилов - QA</a> </br>
 <a href="https://github.com/ASSkimos"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Максим Макаренко - Frontend</a> </br>
 <h2>📝Тема</h2>
-Персональный ассистент для планирования, анализа продуктивности и оптимизации времени
+Персональный ассистент с искуственным интелектом для планирования задач, анализа продуктивности и оптимизации времени
 <h2>⚙Сервисы</h2>
 <a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=1-3&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10">Figma - Дизайн</a> </br>
 <a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=229-5097&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10">Figma - UI/UX</a> </br>
