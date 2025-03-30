@@ -15,7 +15,7 @@
 <a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=229-5097&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10">Figma - UI/UX</a> </br>
 <a href="https://www.langchain.com/"><img src="https://i.ibb.co/x0hHg9L/langchain-icon.png" alt="" align="center" hspace="10">LangChain</a> </br>
 <a href="https://firebase.google.com/"><img src="https://i.ibb.co/m51pcGjz/firebase-icon.png" alt="" align="center" hspace=10>Firebase</a> </br>
-<a href="https://assistproject.atlassian.net/jira/software/projects/SCRUM/summary"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10">Jira - Управление проектом</a> </br>
+<a href="https://id.atlassian.com/invite/p/jira-software?id=v5fT0461RvyHYFsjN7TGUg"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10">Jira - Управление проектом</a> </br>
 <h2>📄Документация</h2>
 <ul>
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%A2%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5.docx">Техническое задание docx</a></li>
