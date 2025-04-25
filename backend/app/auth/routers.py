@@ -1,0 +1,44 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+
+from app.db.session import get_db
+from app.models.user import UserDB
+from app.auth.oauth2 import create_access_token
+from app.schemas.userlogin import UserLogin
+from app.schemas.usercreate import UserCreate
+
+router = APIRouter(prefix="/Auth", tags=["Auth"])
+
+
+@router.post("/Login")
+def login(user_data: UserLogin, db: Session = Depends(get_db)):
+    user = db.query(UserDB).filter(UserDB.email == user_data.email).first()
+    if not user or user.password_hash != user_data.password:
+        raise HTTPException(status_code=401, detail="Неверный email или пароль")
+
+    access_token = create_access_token(data={"user_id": user.id}, role=user.role)
+    return {"access_token": access_token, "token_type": "bearer"}
+
+
+@router.post("/Registration")
+def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
+    db_user = db.query(UserDB).filter(UserDB.email == user_data.email).first()
+    if db_user:
+        raise HTTPException(status_code=400, detail="Пользователь с таким email уже существует")
+
+    new_user = UserDB(
+        first_name=user_data.first_name,
+        second_name=user_data.second_name,
+        email=user_data.email,
+        password_hash=user_data.password,
+        role=user_data.role or "user",
+        icon=user_data.icon or 1,
+        is_verified=user_data.is_verified if user_data.is_verified is not None else False
+    )
+
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    access_token = create_access_token(data={"user_id": new_user.id}, role=new_user.role)
+    return {"access_token": access_token, "token_type": "bearer"}
