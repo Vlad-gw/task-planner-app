@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from app.models.task import TaskDB
-from app.schemas.task import Task
-from app.schemas.taskupdate import TaskUpdate
+from backend.app.models.task import TaskDB
+from backend.app.schemas.task import Task
+from backend.app.schemas.taskupdate import TaskUpdate
 
 
 def create_task(db: Session, task: Task):

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from app.models.tag import TagDB
-from app.schemas.tag import Tag
-from app.schemas.tagupdate import TagUpdate
+from backend.app.models.tag import TagDB
+from backend.app.schemas.tag import Tag
+from backend.app.schemas.tagupdate import TagUpdate
 
 
 def create_tag(db: Session, tag: Tag):

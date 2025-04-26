@@ -3,8 +3,8 @@ from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException, Depends, Request
 from sqlalchemy.orm import Session
 
-from app.db.session import get_db
-from app.models.user import UserDB
+from backend.app.db.session import get_db
+from backend.app.models.user import UserDB
 import uuid
 
 SECRET_KEY = "super-secret-key"

@@ -1,6 +1,6 @@
 from sqlalchemy import Integer, String, Text, Boolean, BigInteger, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from app.models.base import Base
+from backend.app.models.base import Base
 
 
 class TaskDB(Base):

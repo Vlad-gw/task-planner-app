@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, BigInteger, Integer, VARCHAR
 from sqlalchemy.orm import mapped_column, Mapped
-from app.models.base import Base
+from backend.app.models.base import Base
 
 
 class UserDB(Base):

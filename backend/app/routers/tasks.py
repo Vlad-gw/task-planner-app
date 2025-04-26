@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from app.schemas.task import Task
-from app.crud.tasks import create_task, get_tasks, update_task, delete_task, get_all_tasks
-from app.db.session import get_db
-from app.schemas.taskupdate import TaskUpdate
+from backend.app.schemas.task import Task
+from backend.app.crud.tasks import create_task, get_tasks, update_task, delete_task, get_all_tasks
+from backend.app.db.session import get_db
+from backend.app.schemas.taskupdate import TaskUpdate
 
 router = APIRouter()
 

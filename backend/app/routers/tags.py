@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from app.schemas.tag import Tag
-from app.crud.tags import create_tag, get_tags, update_tag, delete_tag, get_all_tags
-from app.db.session import get_db
-from app.schemas.tagupdate import TagUpdate
+from backend.app.schemas.tag import Tag
+from backend.app.crud.tags import create_tag, get_tags, update_tag, delete_tag, get_all_tags
+from backend.app.db.session import get_db
+from backend.app.schemas.tagupdate import TagUpdate
 
 router = APIRouter()
 

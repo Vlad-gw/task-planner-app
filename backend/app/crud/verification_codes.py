@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models.verificationcode import VerificationCodeDB
-from app.schemas.verificationcode import VerificationCode
+from backend.app.models.verificationcode import VerificationCodeDB
+from backend.app.schemas.verificationcode import VerificationCode
 
 
 def create_verification_code(db: Session, code: VerificationCode):

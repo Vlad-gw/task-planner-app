@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models.user import UserDB
-from app.schemas.userupdate import UserUpdate
+from backend.app.models.user import UserDB
+from backend.app.schemas.userupdate import UserUpdate
 
 
 def get_all_users(db: Session,

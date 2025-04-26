@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
-from app.auth import routers as auth_routers
-from app.routers import (
+from backend.app.auth import routers as auth_routers
+from backend.app.routers import (
     users, tasks, tags,
     verification_codes
 )

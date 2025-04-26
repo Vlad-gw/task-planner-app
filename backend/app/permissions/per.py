@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException
-from app.auth.oauth2 import get_current_user
-from app.models.user import UserDB
+from backend.app.auth.oauth2 import get_current_user
+from backend.app.models.user import UserDB
 
 
 def require_role(role: str):
