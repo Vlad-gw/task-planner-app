@@ -14,8 +14,8 @@ def get_verification_code_view(id: Optional[int] = None, expires: Optional[int] 
 
 
 @router.post("/Create_verification_code", response_model=VerificationCode)
-def create_verification_code_view(db: Session = Depends(get_db)):
-    create_verification_code(db)
+def create_verification_code_view(code: VerificationCode, db: Session = Depends(get_db)):
+    return create_verification_code(db, code)
 
 
 @router.delete("/Delete_verification_code", summary="Delete verification code")
