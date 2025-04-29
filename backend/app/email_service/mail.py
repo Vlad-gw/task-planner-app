@@ -4,6 +4,8 @@ from sib_api_v3_sdk.rest import ApiException
 from pprint import pprint
 from jinja2 import Environment, FileSystemLoader, Template
 import random
+from backend.app.db.session import  get_db
+from backend.app.crud.verification_codes import create_verification_code
 
 proxies = {
     "http": "http://111.72.196.83:2324"
@@ -26,6 +28,9 @@ api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(co
 def send_letter(first_name, second_name, email):
     code = random.randint(100000, 999999)
     code_list = [int(i) for i in str(code)]
+
+    create_verification_code(get_db, value=code)
+
     context = {
         'first_name': first_name,
         'code0': code_list[0],
@@ -37,6 +42,7 @@ def send_letter(first_name, second_name, email):
     }
     template = env.get_template('template.html')
     letter = template.render(context)
+
     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
         sender={"email": "punctualis.team@gmail.com", "name": "Punctualis"},
         to=[{"email": email, "name": first_name + second_name}],

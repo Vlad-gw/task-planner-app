@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from backend.app.schemas.verificationcode import VerificationCode
-from backend.app.crud.verification_codes import create_verification_code, get_verification_codes, delete_verification_code
+from backend.app.crud.verification_codes import create_verification_code, get_verification_codes, \
+    delete_verification_code
 from backend.app.db.session import get_db
 
 router = APIRouter()
@@ -14,8 +15,8 @@ def get_verification_code_view(id: Optional[int] = None, expires: Optional[int] 
 
 
 @router.post("/Create_verification_code", response_model=VerificationCode)
-def create_verification_code_view(code: VerificationCode, db: Session = Depends(get_db)):
-    return create_verification_code(db, code)
+def create_verification_code_view(db: Session = Depends(get_db)):
+    return create_verification_code(db)
 
 
 @router.delete("/Delete_verification_code", summary="Delete verification code")
