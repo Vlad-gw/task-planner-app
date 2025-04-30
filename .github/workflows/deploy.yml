@@ -26,6 +26,6 @@ jobs:
           ssh -i ~/.ssh/id_ed25519 root@212.116.115.5 << 'EOF'
             cd /root/project/task-planner-app/backend/app  # Например, /var/www/myapp
             git pull origin main
-            npm install  # Если Node.js проект
-            pm2 restart app  # Если используете PM2
+            source /root/myvenv/bin/activate  # путь к виртуальному окружению, если есть
+            python3 -m backend.app.main
           EOF
