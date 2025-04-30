@@ -11,13 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VDS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H 212.116.115.5 >> ~/.ssh/known_hosts
 
       - name: Deploy
         run: |
-          pkill -f "uvicorn" || true
           ssh -i ~/.ssh/id_ed25519 root@212.116.115.5 << 'EOF'
+            set -e
+            pkill -f "uvicorn" || true
             cd /root/project/task-planner-app
             git pull origin main
             source /root/myvenv/bin/activate
-            python3 -m backend.app.main
+            nohup python3 -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 &
           EOF
