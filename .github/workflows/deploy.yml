@@ -23,9 +23,10 @@ jobs:
       # Шаг 3: Деплой
       - name: Deploy
         run: |
+          pkill -f "uvicorn" || true
           ssh -i ~/.ssh/id_ed25519 root@212.116.115.5 << 'EOF'
-            cd /root/project/task-planner-app/backend/app  # Например, /var/www/myapp
+            cd /root/project/task-planner-app
             git pull origin main
-            source /root/myvenv/bin/activate  # путь к виртуальному окружению, если есть
+            source /root/myvenv/bin/activate
             python3 -m backend.app.main
           EOF
