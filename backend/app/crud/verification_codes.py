@@ -1,6 +1,5 @@
 from datetime import datetime, timezone, timedelta
 import random
-import pytz
 from sqlalchemy.orm import Session
 from backend.app.models.verificationcode import VerificationCodeDB
 
