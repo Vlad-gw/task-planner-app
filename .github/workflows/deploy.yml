@@ -2,22 +2,24 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]  # Триггер на пуш в ветку main
 
 jobs:
   deploy:
-    runs-on: ubuntu:22.04
+    runs-on: ubuntu-latest
 
     steps:
+      # Шаг 1: Загрузка кода
       - uses: actions/checkout@v3
 
+      # Шаг 2: Настройка SSH
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VDS_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H 212.116.115.5 >> ~/.ssh/known_hosts
-
+      # Шаг 3: Деплой
       - name: Deploy
         run: |
           ssh -i ~/.ssh/id_ed25519 root@212.116.115.5 << 'EOF'
