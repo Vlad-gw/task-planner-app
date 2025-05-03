@@ -1,10 +1,13 @@
+from typing import List, Optional
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from typing import List, Optional
-from backend.app.schemas.task import Task
 from backend.app.crud.tasks import create_task, get_tasks, update_task, delete_task, get_all_tasks
 from backend.app.db.session import get_db
+from backend.app.schemas.task import Task
+from backend.app.schemas.taskcreate import TaskCreate
 from backend.app.schemas.taskupdate import TaskUpdate
+from backend.app.auth.oauth2 import get_current_user
+from backend.app.models.user import UserDB
 
 router = APIRouter()
 
@@ -21,9 +24,12 @@ def read_task(id: int = Query(..., description="ID task, required field"),
     return get_tasks(db, id=id, user_id=user_id)
 
 
-@router.post("/Create_task", response_model=Task)
-def create(task: Task, db: Session = Depends(get_db)):
-    return create_task(db, task)
+@router.post("/create_task", response_model=Task)
+def create_task_endpoint(
+        task: TaskCreate,
+        db: Session = Depends(get_db),
+        current_user: UserDB = Depends(get_current_user)):
+    return create_task(db, task, user_id=current_user.id)
 
 
 @router.put("/Update_task", response_model=Task)

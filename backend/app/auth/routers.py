@@ -6,8 +6,18 @@ from backend.app.models.user import UserDB
 from backend.app.auth.oauth2 import create_access_token
 from backend.app.schemas.userlogin import UserLogin
 from backend.app.schemas.usercreate import UserCreate
+from backend.app.auth.oauth2 import get_current_user
 
 router = APIRouter(prefix="/Auth", tags=["Auth"])
+
+
+@router.get("/Who_I_am")
+def get_profile(current_user: UserDB = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "email": current_user.email,
+        "role": current_user.role
+    }
 
 
 @router.post("/Login")
@@ -16,7 +26,7 @@ def login(user_data: UserLogin, db: Session = Depends(get_db)):
     if not user or user.password_hash != user_data.password:
         raise HTTPException(status_code=401, detail="Неверный email или пароль")
 
-    access_token = create_access_token(data={"user_id": user.id}, role=user.role)
+    access_token = create_access_token(user_id=user.id, role=user.role)
     return {"access_token": access_token, "token_type": "bearer"}
 
 
@@ -40,5 +50,5 @@ def register_user(user_data: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    access_token = create_access_token(data={"user_id": new_user.id}, role=new_user.role)
+    access_token = create_access_token(user_id=new_user.id, role=new_user.role)
     return {"access_token": access_token, "token_type": "bearer"}

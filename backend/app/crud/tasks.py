@@ -1,13 +1,25 @@
 from sqlalchemy.orm import Session
+
 from backend.app.models.task import TaskDB
-from backend.app.schemas.task import Task
+from backend.app.models.tasklist import TaskListDB
+from backend.app.models.user import UserDB
+from backend.app.schemas.taskcreate import TaskCreate
 from backend.app.schemas.taskupdate import TaskUpdate
 
 
-def create_task(db: Session, task: Task):
+def create_task(db: Session, task: TaskCreate, user_id: int):
+    user = db.query(UserDB).filter(UserDB.id == user_id).first()
+    if not user:
+        raise ValueError(f"User with id {user_id} not found")
+
     db_task = TaskDB(**task.model_dump())
     db.add(db_task)
     db.commit()
+
+    db_link = TaskListDB(task_id=db_task.id, user_id=user_id)
+    db.add(db_link)
+    db.commit()
+
     db.refresh(db_task)
     return db_task
 

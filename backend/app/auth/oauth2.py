@@ -12,30 +12,28 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
-def create_access_token(data: dict, role: str = "user"):
-    to_encode = data.copy()
-    to_encode.update({"role": role})
-
-    to_encode["jti"] = str(uuid.uuid4())
-
-    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
-
+def create_access_token(user_id: int, role: str = "user"):
+    to_encode = {
+        "user_id": user_id,
+        "role": role,
+        "jti": str(uuid.uuid4()),
+        "exp": datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    }
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
 def decode_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: int = payload.get("user_id")
-        role: str = payload.get("role")
+        user_id = payload.get("user_id")
+        role = payload.get("role")
 
         if user_id is None:
-            raise HTTPException(status_code=401, detail="Invalid token")
+            raise HTTPException(status_code=401, detail="Токен не содержит user_id")
 
         return user_id, role
     except JWTError:
-        raise HTTPException(status_code=401, detail="Invalid token")
+        raise HTTPException(status_code=401, detail="Недействительный токен")
 
 
 def get_current_user(request: Request, db: Session = Depends(get_db)) -> UserDB:
@@ -45,6 +43,7 @@ def get_current_user(request: Request, db: Session = Depends(get_db)) -> UserDB:
 
     token = auth_header.split(" ")[1]
     user_id, role = decode_token(token)
+
     user = db.query(UserDB).filter(UserDB.id == user_id).first()
     if user is None:
         raise HTTPException(status_code=404, detail="Пользователь не найден")

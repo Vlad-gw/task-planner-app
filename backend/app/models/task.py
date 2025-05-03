@@ -10,7 +10,6 @@ class TaskDB(Base):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, index=True, autoincrement=True)
     title: Mapped[str] = mapped_column(String(50))
     description: Mapped[str] = mapped_column(Text, nullable=True)
-    list_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("task_lists.id"))
     priority: Mapped[int] = mapped_column(Integer)
     creation_date: Mapped[int] = mapped_column(BigInteger)
     finish_date: Mapped[int] = mapped_column(BigInteger, nullable=True)
