@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from backend.app.schemas.tag import Tag
+from backend.app.schemas.tagcreate import TagCreate
 from backend.app.crud.tags import create_tag, get_tags, update_tag, delete_tag, get_all_tags
 from backend.app.db.session import get_db
 from backend.app.schemas.tagupdate import TagUpdate
@@ -21,7 +22,7 @@ def read_tag(id: int = Query(..., description="ID тега, required field"),
 
 
 @router.post("/Create_tag", response_model=Tag)
-def create(tag: Tag, db: Session = Depends(get_db)):
+def create(tag: TagCreate, db: Session = Depends(get_db)):
     return create_tag(db, tag)
 
 

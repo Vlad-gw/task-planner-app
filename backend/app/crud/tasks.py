@@ -1,10 +1,29 @@
 from sqlalchemy.orm import Session
 
 from backend.app.models.task import TaskDB
+from backend.app.models.tag import TagDB
 from backend.app.models.tasklist import TaskListDB
+from backend.app.models.tasktag import TaskTagDB
 from backend.app.models.user import UserDB
 from backend.app.schemas.taskcreate import TaskCreate
 from backend.app.schemas.taskupdate import TaskUpdate
+
+
+def add_tag_to_task(db: Session, task_id: int, tag_id: int):
+    task = db.query(TaskDB).filter(TaskDB.id == task_id).first()
+    tag = db.query(TagDB).filter(TagDB.id == tag_id).first()
+    if not task or not tag:
+        raise ValueError("Task or Tag not found")
+
+    existing = db.query(TaskTagDB).filter_by(task_id=task_id, tag_id=tag_id).first()
+    if existing:
+        return task
+
+    task_tag = TaskTagDB(task_id=task_id, tag_id=tag_id)
+    db.add(task_tag)
+    db.commit()
+    db.refresh(task)
+    return task
 
 
 def create_task(db: Session, task: TaskCreate, user_id: int):
@@ -59,9 +78,12 @@ def update_task(db: Session, id: int, task_data: TaskUpdate):
     return None
 
 
-def delete_task(db: Session, id: int):
-    db_task = db.query(TaskDB).filter(TaskDB.id == id).first()
-    if db_task:
-        db.delete(db_task)
-        db.commit()
-    return db_task
+def delete_task(db: Session, task_id: int):
+    db.query(TaskListDB).filter(TaskListDB.task_id == task_id).delete()
+
+    task = db.query(TaskDB).filter(TaskDB.id == task_id).first()
+    if not task:
+        return None
+    db.delete(task)
+    db.commit()
+    return task

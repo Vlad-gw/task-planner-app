@@ -15,6 +15,8 @@ router = APIRouter(prefix="/Auth", tags=["Auth"])
 def get_profile(current_user: UserDB = Depends(get_current_user)):
     return {
         "id": current_user.id,
+        "first_name": current_user.first_name,
+        "second_name": current_user.second_name,
         "email": current_user.email,
         "role": current_user.role
     }
@@ -26,7 +28,13 @@ def login(user_data: UserLogin, db: Session = Depends(get_db)):
     if not user or user.password_hash != user_data.password:
         raise HTTPException(status_code=401, detail="Неверный email или пароль")
 
-    access_token = create_access_token(user_id=user.id, role=user.role)
+    access_token = create_access_token(
+        user_id=user.id,
+        first_name=user.first_name,
+        second_name=user.second_name,
+        email=user.email,
+        role=user.role
+    )
     return {"access_token": access_token, "token_type": "bearer"}
 
 

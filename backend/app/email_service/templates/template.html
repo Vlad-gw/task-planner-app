@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+          rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Код подтверждения | Punctualis</title>
+</head>
+<body>
+<div style="font-family: Comfortaa, sans-serif;">
+    <h1>Здравствуйте, {{ first_name }}.</h1>
+    <p>Благодарим за выбор нашего приложения Punctualis!</p>
+
+    Чтобы завершить процесс регистрации, пожалуйста, введите следующий код подтверждения:
+
+    <table align="center" style="background-color: #efefef; padding: 10pt">
+        <tr>
+            <td>
+                <div style="border: 2px solid black; border-radius: 10px; padding: 10px;">{{ code0 }}</div>
+            </td>
+            <td>
+                <div style="border: 2px solid black; border-radius: 10px; padding: 10px;">{{ code1 }}</div>
+            </td>
+            <td>
+                <div style="border: 2px solid black; border-radius: 10px; padding: 10px;">{{ code2 }}</div>
+            </td>
+            <td>
+                <div style="border: 2px solid black; border-radius: 10px; padding: 10px;">{{ code3 }}</div>
+            </td>
+            <td>
+                <div style="border: 2px solid black; border-radius: 10px; padding: 10px;">{{ code4 }}</div>
+            </td>
+            <td>
+                <div style="border: 2px solid black; border-radius: 10px; padding: 10px;">{{ code5 }}</div>
+            </td>
+        </tr>
+    </table>
+
+    Если вы не запрашивали этот код, просто проигнорируйте это сообщение.
+    </br>
+    С уважением,
+    Команда Punctualis.
+</div>
+</body>
+</html>

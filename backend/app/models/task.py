@@ -1,5 +1,6 @@
 from sqlalchemy import Integer, String, Text, Boolean, BigInteger, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from backend.app.models.base import Base
 
 
@@ -16,3 +17,7 @@ class TaskDB(Base):
     is_done: Mapped[bool] = mapped_column(Boolean, default=False)
     time_reminder: Mapped[int] = mapped_column(BigInteger, nullable=True)
     scheduled_at: Mapped[int] = mapped_column(BigInteger, nullable=True)
+    task_lists = relationship("TaskListDB", back_populates="task", passive_deletes=True)
+    task_tags = relationship("TaskTagDB", back_populates="task", cascade="all, delete-orphan")
+    tags = association_proxy("task_tags", "tag")
+    task_tags: Mapped[list["TaskTagDB"]] = relationship("TaskTagDB", back_populates="task", cascade="all, delete-orphan")
