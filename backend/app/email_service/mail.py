@@ -16,7 +16,7 @@ env = Environment(
 )
 configuration = sib_api_v3_sdk.Configuration()
 configuration.api_key[
-    'api-key'] = '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'
+    'api-key'] = ''
 # configuration.proxy = proxies['http']
 
 api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
