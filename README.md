@@ -1,6 +1,12 @@
 # Android приложение Punctualis
 
 </br>
+<h2>🚀Релиз </h2>
+<ul>
+<li>
+<a href="https://github.com/Vlad-gw/task-planner-app/releases/tag/Frontend">Punctualis.apk</a>
+</li>
+</ul>
 <h2>👥Команда</h2>
 <a href="https://github.com/DariaGudkova"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Дарья Гудкова - Аналитик & Технический писатель</a> </br>
 <a href="https://github.com/SavvDima"><img src="https://i.ibb.co/zTvDYWMj/github-icon.png" alt="" width="20px" height="20px" align="center" hspace="10">Дмитрий Саввинов - PM & UI/UX design</a> </br>
@@ -60,12 +66,12 @@
 </ul>
 <h2>⚡Чеклист</h2>
 <ul>
-    <li><a href="">Чеклист команды 7.3 pdf</a></li>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%A2%D0%9F%20%D0%A7%D0%B5%D0%BA%D0%BB%D0%B8%D1%81%D1%82%202%20%D1%8D%D1%82%D0%B0%D0%BF.pdf">Чеклист команды 7.3 pdf</a></li>
 </ul>
 <h2>💯Оценки от других команд</h2>
 <ul>
-    <li><a href="">Команда </a></li>
-    <li><a href="">Команда </a></li>
-    <li><a href="">Команда </a></li>
-    <li><a href="">Команда </a></li>
+    <li><a href="">Команда </a>Команда СК 2</li>
+    <li><a href="">Команда </a>Команда 5.3</li>
+    <li><a href="">Команда </a>Команда 8.4</li>
+    <li><a href="https://github.com/ReflectAppTP/documentation/blob/main/%D0%A7%D0%B5%D0%BA%20%D0%9B%D0%B8%D1%81%D1%82%202%20MVP.pdf">Команда </a>Команда 7.2</li>
 </ul>
