@@ -140,20 +140,23 @@ class _RegisterState extends State<Register> {
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 20),
                 ValidatedTextField(
                   labelText: 'Имя',
                   controller: _nameController,
                   errorText: _nameError,
                   onChanged: _validateName,
                 ),
+                SizedBox(height: 20),
                 ValidatedTextField(
                   labelText: 'Фамилия',
                   controller: _surnameController,
                   errorText: _surnameError,
                   onChanged: _validateSurname,
                 ),
+                SizedBox(height: 20),
                 ValidatedTextField(
                   labelText: "E-mail",
                   controller: _emailController,
@@ -161,6 +164,7 @@ class _RegisterState extends State<Register> {
                   onChanged: _validateEmail,
                   keyboardType: TextInputType.emailAddress,
                 ),
+                SizedBox(height: 20),
                 ValidatedTextField(
                   labelText: 'Пароль',
                   controller: _passwordController,
@@ -178,6 +182,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20),
                 ValidatedTextField(
                   labelText: 'Подтвердите пароль',
                   controller: _confirmPasswordController,

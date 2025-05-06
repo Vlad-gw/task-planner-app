@@ -4,7 +4,7 @@ class ErrorIndicator extends StatelessWidget {
   final bool hasError;
   final String? errorText;
   final bool isEmpty;
-  final bool wasValidated; // Добавляем флаг валидации формы
+  final bool wasValidated; 
 
   const ErrorIndicator({
     super.key, 
