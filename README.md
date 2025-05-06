@@ -31,6 +31,9 @@
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%A2%D0%97.pdf">Презентация технического задания pdf</a></li>
     <li><a href="https://www.figma.com/slides/EXWY9vpSEutWfmmiXnFBlo/Untitled?node-id=1-32&t=hxZWZDc2GPuP2EQb-0">Презентация технического задания Figma</a></li>
     <li><a href="https://rutube.ru/video/80b37bc3543881da589ceb3db90e9eba/?r=wd">Видеопрезентация технического задания Rutube </a></li>
+    <li><a href="https://rutube.ru/video/f2b0bd0e06e09b594a7aa3739d8e16ef/">Видеопрезентация MVP Rutube </a></li
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20MVP.pdf">Презентация MVP pdf</a></li>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20MVP.pptx">Презентация MVP pptx</a></li>
 </ul>
 <h2>⚡Чеклист</h2>
 <ul>
