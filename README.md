@@ -52,6 +52,12 @@
 <ul>
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/PM%20%D0%BE%D1%82%D1%87%D0%B5%D1%82.pdf">PM отчет pdf</a></li>
 </ul>
+<h2>📄Тестовая документация</h2>
+<ul>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20%D0%BE%20%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8.pdf">Отчет о тестировании pdf</a></li>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%A2%D0%B5%D1%81%D1%82-%D0%BF%D0%BB%D0%B0%D0%BD%20Punctualis.pdf">Тест-план Punctualis pdf</a></li>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%A2%D0%B5%D1%81%D1%82-%D0%BA%D0%B5%D0%B8%CC%86%D1%81%D1%8B%20Punctualis.xlsx">Тест-кейсы Punctualis xlsx</a></li>
+</ul>
 <h2>⚡Чеклист</h2>
 <ul>
     <li><a href="">Чеклист команды 7.3 pdf</a></li>
