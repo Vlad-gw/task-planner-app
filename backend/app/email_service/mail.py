@@ -3,20 +3,23 @@ import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 from pprint import pprint
 from jinja2 import Environment, FileSystemLoader, Template
+from pathlib import Path
 
 proxies = {
-    "http": "http://111.72.196.83:2324"
+    "http": "http://177.104.209.248:8080"
 }
 
+templates_dir = Path(__file__).parent / "templates"
+
 env = Environment(
-    loader=FileSystemLoader('templates'),
+    loader=FileSystemLoader(templates_dir),
     autoescape=True,
     trim_blocks=True,
     lstrip_blocks=True
 )
 configuration = sib_api_v3_sdk.Configuration()
 configuration.api_key[
-    'api-key'] = ''
+    'api-key'] = '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'
 # configuration.proxy = proxies['http']
 
 api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))

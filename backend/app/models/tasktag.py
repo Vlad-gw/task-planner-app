@@ -29,3 +29,6 @@ class TaskTagDB(Base):
         "TagDB",
         back_populates="tag_tasks"
     )
+
+    task: Mapped["TaskDB"] = relationship("TaskDB", back_populates="tag_associations")
+    tag: Mapped["TagDB"] = relationship("TagDB", back_populates="task_associations")

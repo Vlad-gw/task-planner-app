@@ -2,6 +2,7 @@ from datetime import datetime, timezone, timedelta
 import random
 from sqlalchemy.orm import Session
 from backend.app.models.verificationcode import VerificationCodeDB
+from backend.app.email_service.mail import send_letter
 
 
 def generate_verification_code() -> str:
@@ -41,3 +42,9 @@ def delete_verification_code(db: Session, id: int):
         db.delete(db_code)
         db.commit()
     return db_code
+
+
+def create_and_send_verification_code(db: Session, first_name: str, second_name: str, email: str):
+    code_obj = create_verification_code(db)
+    send_letter(first_name, second_name, email, code_obj.value)
+    return code_obj

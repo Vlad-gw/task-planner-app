@@ -18,6 +18,10 @@ class TaskDB(Base):
     time_reminder: Mapped[int] = mapped_column(BigInteger, nullable=True)
     scheduled_at: Mapped[int] = mapped_column(BigInteger, nullable=True)
     task_lists = relationship("TaskListDB", back_populates="task", passive_deletes=True)
-    task_tags = relationship("TaskTagDB", back_populates="task", cascade="all, delete-orphan")
-    tags = association_proxy("task_tags", "tag")
-    task_tags: Mapped[list["TaskTagDB"]] = relationship("TaskTagDB", back_populates="task", cascade="all, delete-orphan")
+    tag_associations: Mapped[list["TaskTagDB"]] = relationship(
+        "TaskTagDB",
+        back_populates="task",
+        cascade="all, delete-orphan"
+    )
+
+    tags = association_proxy("tag_associations", "tag")

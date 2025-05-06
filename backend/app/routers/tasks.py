@@ -30,7 +30,7 @@ def read_task(id: int = Query(..., description="ID task, required field"),
     return get_tasks(db, id=id, user_id=user_id)
 
 
-@router.post("/create_task", response_model=Task)
+@router.post("/Create_task", response_model=Task)
 def create_task_endpoint(
         task: TaskCreate,
         db: Session = Depends(get_db),

@@ -11,6 +11,10 @@ class TagDB(Base):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, index=True, autoincrement=True)
     tag_name: Mapped[str] = mapped_column(String(50))
     color: Mapped[str] = mapped_column(String(6))
-    task_tags = relationship("TaskTagDB", back_populates="tag", cascade="all, delete-orphan")
-    tasks = association_proxy("task_tags", "task")
-    tag_tasks: Mapped[list["TaskTagDB"]] = relationship("TaskTagDB", back_populates="tag", cascade="all, delete-orphan")
+    task_associations: Mapped[list["TaskTagDB"]] = relationship(
+        "TaskTagDB",
+        back_populates="tag",
+        cascade="all, delete-orphan"
+    )
+
+    tasks = association_proxy("task_associations", "task")
