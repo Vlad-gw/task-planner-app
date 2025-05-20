@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/utils/validated_text_field.dart';
+import 'package:punctualis_1/api/api_service.dart';
 
 class Authorize extends StatefulWidget {
   const Authorize({super.key});
@@ -150,9 +151,21 @@ class _AutorizeState extends State<Authorize> {
                     SizedBox(width: 16),
                     Expanded(
                       child: FilledButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_validateForm()) {
-                            Navigator.pushNamed(context, '/dlg');
+                            final ApiService _apiService = ApiService();
+                            try {
+                              await _apiService.login(
+                                _emailController.text,
+                                _passwordController.text,
+                                _isChecked
+                              );
+                              Navigator.pushReplacementNamed(context, '/dlg');
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(e.toString())),
+                              );
+                            }
                           }
                         },
                         child: const Text("Далее"),

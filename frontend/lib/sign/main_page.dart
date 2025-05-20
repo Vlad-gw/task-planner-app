@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/utils/triangle.dart';
+import 'package:punctualis_1/api/api_service.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -95,7 +96,24 @@ class MainScreen extends StatelessWidget {
                     child: const Text("Авторизация"),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final ApiService _apiService = ApiService();
+                      Map<String, dynamic>? _responseData;
+                      String _error = '';
+                      Future<void> _fetchData() async {
+                        final data = await _apiService.getAllUsers();
+                      }
+                      final snackBar = SnackBar(
+                        content: Text(_fetchData().toString()),
+                        action: SnackBarAction(
+                          label: 'Отмена',
+                          onPressed: () {
+                            // Действие при нажатии
+                          },
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
                     style: TextButton.styleFrom(
                       minimumSize: Size(double.infinity, 43),
                     ),
