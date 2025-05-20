@@ -1,11 +1,14 @@
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
-from fastapi import HTTPException, Depends, Request
+from fastapi import HTTPException, Depends, status
 from sqlalchemy.orm import Session
+from fastapi.security import OAuth2PasswordBearer
 
 from backend.app.db.session import get_db
 from backend.app.models.user import UserDB
 import uuid
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/Auth/Login")
 
 SECRET_KEY = "super-secret-key"
 ALGORITHM = "HS256"
@@ -48,21 +51,24 @@ def decode_token(token: str):
         raise HTTPException(status_code=401, detail="Недействительный токен")
 
 
-def get_current_user(request: Request, db: Session = Depends(get_db)) -> UserDB:
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Отсутствует токен авторизации")
+async def get_current_user(
+        token: str = Depends(oauth2_scheme),
+        db: Session = Depends(get_db)
+) -> UserDB:
+    try:
+        user_data = decode_token(token)
+        user = db.query(UserDB).filter(UserDB.id == user_data["id"]).first()
 
-    token = auth_header.split(" ")[1]
-    user_data = decode_token(token)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found"
+            )
 
-    user = db.query(UserDB).filter(UserDB.id == user_data["id"]).first()
-    if user is None:
-        raise HTTPException(status_code=404, detail="Пользователь не найден")
+        return user
 
-    user.first_name = user_data["first_name"]
-    user.second_name = user_data["second_name"]
-    user.email = user_data["email"]
-    user.role = user_data["role"]
-
-    return user
+    except JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token"
+        )
