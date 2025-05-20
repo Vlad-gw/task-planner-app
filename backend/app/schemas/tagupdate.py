@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field
 from typing import Annotated
-import re
 
 HexColor = Annotated[str, Field(min_length=6, max_length=6, pattern=r'^[0-9A-Fa-f]{6}$')]
 
