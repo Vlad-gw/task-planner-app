@@ -4,6 +4,8 @@ import 'package:punctualis_1/sign/register.dart';
 import 'package:punctualis_1/sign/main_page.dart';
 import 'package:punctualis_1/sign/confirmation.dart';
 import 'package:punctualis_1/main_app/dialogue_page.dart';
+import 'package:punctualis_1/main_app/settings.dart';
+import 'package:punctualis_1/main_app/calendar.dart';
 
 void main() => runApp(const MyApp());
 
@@ -25,7 +27,8 @@ class MyApp extends StatelessWidget {
       '/auth': (context) => const Authorize(),
       '/conf': (context) => const Confirmation(),
       '/dlg': (context) => const DialoguePage(),
-
+      '/sttgs': (context) => const Settings(),
+      '/calend': (context) => const Calendar(),
     },
   );
   }

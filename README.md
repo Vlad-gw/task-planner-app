@@ -17,11 +17,13 @@
 <h2>📝Тема</h2>
 Персональный ассистент с искуственным интелектом для планирования задач, анализа продуктивности и оптимизации времени
 <h2>⚙Сервисы</h2>
-<a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=1-3&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10">Figma - Дизайн</a> </br>
-<a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=229-5097&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10">Figma - UI/UX</a> </br>
-<a href="https://www.langchain.com/"><img src="https://i.ibb.co/x0hHg9L/langchain-icon.png" alt="" align="center" hspace="10">LangChain</a> </br>
-<a href="https://firebase.google.com/"><img src="https://i.ibb.co/m51pcGjz/firebase-icon.png" alt="" align="center" hspace=10>Firebase</a> </br>
-<a href="https://assistproject.atlassian.net/jira/software/projects/SCRUM/summary?atlOrigin=eyJpIjoiNzg5MGE1MzZjOTNhNDg1NDkxZWViOWI2YTUzZGJiMmYiLCJwIjoiaiJ9"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10">Jira - Управление проектом</a> </br>
+<a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=1-3&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10" style="margin-bottom: 4px">Figma - Дизайн</a> </br>
+<a href="https://www.figma.com/design/zKCeAk64GQ9WTa4Hp1CM9Z/Punctualis?node-id=229-5097&p=f&t=7o1DZfB9tyQksf4c-0"><img src="https://i.ibb.co/Wp2DgvsN/figma-icon.png" alt="" align="center" hspace="10" style="margin-bottom: 4px">Figma - UI/UX</a> </br>
+<a href="https://www.langchain.com/"><img src="https://i.ibb.co/x0hHg9L/langchain-icon.png" alt="" align="center" hspace="10" style="margin-bottom: 4px">LangChain - ИИ</a> </br>
+<a href="https://firebase.google.com/"><img src="https://i.ibb.co/m51pcGjz/firebase-icon.png" alt="" align="center" hspace=10 style="margin-bottom: 10px">Firebase - Уведомления</a> </br>
+<a href="https://assistproject.atlassian.net/jira/software/projects/SCRUM/summary?atlOrigin=eyJpIjoiNzg5MGE1MzZjOTNhNDg1NDkxZWViOWI2YTUzZGJiMmYiLCJwIjoiaiJ9"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10" style="margin-bottom: 10px">Jira - Управление проектом</a> </br>
+<a href="https://www.reg.ru/"><img src="https://i.ibb.co/KcK8vvQd/3dfd240e52eed8865ecf930c966f15f8.jpg" alt="" align="center" hspace="10" style="width: 5%; height: 5%; margin-bottom: 8px">рег.ру - Сервер</a> </br>
+<a href="https://supabase.com/"><img src="https://i.ibb.co/KBNZN9h/68747470733a2f2f6b696e677368756b2e76657263656c2e6170702f49636f6e732f73757061626173652e706e67.png" alt="" align="center" hspace="10" style="width: 5%; height: 5%; margin-bottom: 4px">Supabase - БД</a> </br>
 <h2>📄Документация</h2>
 <ul>
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%A2%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5.docx">Техническое задание docx</a></li>
@@ -37,7 +39,7 @@
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%D0%A2%D0%97.pdf">Презентация технического задания pdf</a></li>
     <li><a href="https://www.figma.com/slides/EXWY9vpSEutWfmmiXnFBlo/Untitled?node-id=1-32&t=hxZWZDc2GPuP2EQb-0">Презентация технического задания Figma</a></li>
     <li><a href="https://rutube.ru/video/80b37bc3543881da589ceb3db90e9eba/?r=wd">Видеопрезентация технического задания Rutube </a></li>
-    <li><a href="https://rutube.ru/video/f2b0bd0e06e09b594a7aa3739d8e16ef/">Видеопрезентация MVP Rutube </a></li
+    <li><a href="https://rutube.ru/video/f2b0bd0e06e09b594a7aa3739d8e16ef/">Видеопрезентация MVP Rutube </a></li>
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20MVP.pdf">Презентация MVP pdf</a></li>
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20MVP.pptx">Презентация MVP pptx</a></li>
 </ul>

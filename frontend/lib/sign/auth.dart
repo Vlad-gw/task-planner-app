@@ -15,6 +15,7 @@ class _AutorizeState extends State<Authorize> {
   final _passwordController = TextEditingController();
   String? _emailError;
   String? _passwordError;
+  
   @override
   void dispose() {
     _emailController.dispose();
