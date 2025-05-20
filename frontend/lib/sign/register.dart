@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/utils/validated_text_field.dart';
+import 'package:punctualis_1/api/api_service.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -219,9 +220,23 @@ class _RegisterState extends State<Register> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: FilledButton(
-                        onPressed: () {
+                         onPressed: () async {
                           if (_validateForm()) {
-                            Navigator.pushNamed(context, '/conf');
+                            final ApiService _apiService = ApiService();
+                            try {
+                              await _apiService.register(
+                                _nameController.text,
+                                _surnameController.text,
+                                _emailController.text,
+                                _passwordController.text,
+                              );
+                              await _apiService.login(_emailController.text, _passwordController.text, true);
+                              Navigator.pushReplacementNamed(context, '/calend');
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(e.toString())),
+                              );
+                            }
                           }
                         },
                         child: const Text("Далее"),
