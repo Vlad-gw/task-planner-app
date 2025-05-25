@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.app.db.session import get_db
 from backend.app.models.user import UserDB
+from backend.app.schemas.token import Token
 from backend.app.schemas.usercreate import UserCreate
 from backend.app.auth.oauth2 import create_access_token
 from backend.app.auth.oauth2 import get_current_user
@@ -21,11 +22,52 @@ def get_profile(current_user: UserDB = Depends(get_current_user)):
     }
 
 
-@router.post("/Login")
-def login(user_data: UserLogin, db: Session = Depends(get_db)):
+@router.post(
+    "/Login",
+    response_model=Token,
+    summary="Аутентификация пользователя",
+    description="Получение JWT токена по email и паролю",
+    responses={
+        200: {
+            "content": {
+                "application/json": {
+                    "example": {
+                        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                        "token_type": "bearer"
+                    }
+                }
+            },
+            "headers": {
+                "Authorization": {
+                    "description": "Bearer token для использования в заголовках",
+                    "schema": {"type": "string"}
+                }
+            }
+        },
+        401: {
+            "description": "Неверные учетные данные",
+            "content": {
+                "application/json": {
+                    "example": {"detail": "Неверный email или пароль"}
+                }
+            }
+        }
+    },
+    openapi_extra={
+        "security": [{"BearerAuth": []}]
+    }
+)
+async def login(
+        user_data: UserLogin,
+        db: Session = Depends(get_db)
+):
     user = db.query(UserDB).filter(UserDB.email == user_data.email).first()
     if not user or user.password_hash != user_data.password:
-        raise HTTPException(status_code=401, detail="Неверный email или пароль")
+        raise HTTPException(
+            status_code=401,
+            detail="Неверный email или пароль",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
     access_token = create_access_token(
         user_id=user.id,
