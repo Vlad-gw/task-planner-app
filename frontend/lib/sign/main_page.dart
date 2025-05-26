@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/utils/triangle.dart';
 import 'package:punctualis_1/api/api_service.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("MainPage");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +37,8 @@ class MainScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomPaint(
-                   painter: TrianglePainter(cornerRadius: 3),
-                   size: Size(80, 80),
+                    painter: TrianglePainter(cornerRadius: 3),
+                    size: Size(80, 80),
                   ),
                   SizedBox(height: 5),
                   Row(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/utils/validated_text_field.dart';
 import 'package:punctualis_1/api/api_service.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -26,6 +27,13 @@ class _RegisterState extends State<Register> {
   String? _emailError;
   String? _passwordError;
   String? _confirmPasswordError;
+
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("Register");
+  }
 
   @override
   void dispose() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -9,6 +10,13 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("Settings");
+  }
 
   void _showLeftSideMenu() {
     _scaffoldKey.currentState?.openDrawer();

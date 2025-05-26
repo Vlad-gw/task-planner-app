@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:punctualis_1/api/metrica.dart';
 import 'package:punctualis_1/main_app/splash.dart';
 import 'package:punctualis_1/sign/auth.dart';
 import 'package:punctualis_1/sign/register.dart';
@@ -51,7 +52,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
     return FutureBuilder(
       future: _apiService.isAuthenticated(),
       builder: (context, snapshot) {
-        print(_apiService.isAuthenticated().toString());
+        Metrica.init();
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Splash();
         } else {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/utils/validated_text_field.dart';
 import 'package:punctualis_1/api/api_service.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
 class Authorize extends StatefulWidget {
   const Authorize({super.key});
@@ -16,7 +17,15 @@ class _AutorizeState extends State<Authorize> {
   final _passwordController = TextEditingController();
   String? _emailError;
   String? _passwordError;
-  
+
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("Auth");
+  }
+
+
   @override
   void dispose() {
     _emailController.dispose();

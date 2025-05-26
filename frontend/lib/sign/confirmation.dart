@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
 class Confirmation extends StatefulWidget {
   const Confirmation({super.key});
@@ -11,6 +12,13 @@ class Confirmation extends StatefulWidget {
 
 class _ConfirmationState extends State<Confirmation> {
   TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("Confirmation");
+  }
+
 
   @override
   Widget build(BuildContext context) {

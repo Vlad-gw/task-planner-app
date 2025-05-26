@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -15,6 +16,13 @@ class _CalendarState extends State<Calendar> {
 
 
   Map<DateTime, List<String>> tasks = {};
+
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("Calendar");
+  }
 
     Widget _buildMenuButton(String text, String route) {
     return Padding(

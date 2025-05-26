@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:punctualis_1/api/metrica.dart';
 
 class Message {
   final String text;
@@ -20,6 +21,13 @@ class _DialoguePageState extends State<DialoguePage> {
   final List<Message> messages = [];
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.screenOpen("DialoguePage");
+  }
 
   void _sendMessage() {
     final text = _controller.text;
