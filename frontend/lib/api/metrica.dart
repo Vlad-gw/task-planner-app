@@ -27,8 +27,8 @@ abstract class Metrica {
     AppMetrica.reportEvent('Screen $value opened');
   }
 
-  static void navigationMenuUsed(String value) {
-    AppMetrica.reportEvent('Navigation menu used. Value:  $value');
+  static void navigationMenuUsed() {
+    AppMetrica.reportEvent('Navigation menu used');
   }
 
   static void taskCreate(String value) {

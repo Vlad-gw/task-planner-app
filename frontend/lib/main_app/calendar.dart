@@ -46,6 +46,7 @@ class _CalendarState extends State<Calendar> {
 
   void _showLeftSideMenu() {
     _scaffoldKey.currentState?.openDrawer();
+    Metrica.navigationMenuUsed();
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
@@ -121,9 +122,10 @@ class _CalendarState extends State<Calendar> {
                   } else {
                     tasks[dateKey] = [taskText];
                   }
+                  Metrica.taskCreate(taskText);
                 });
                 Navigator.pop(context);
-                // После добавления задачи можно сразу показать список задач
+
                 _showTaskMenu(dateKey);
               }
             },

@@ -20,6 +20,7 @@ class _SettingsState extends State<Settings> {
 
   void _showLeftSideMenu() {
     _scaffoldKey.currentState?.openDrawer();
+    Metrica.navigationMenuUsed();
   }
 
   Widget _buildMenuButton(String text, String route) {

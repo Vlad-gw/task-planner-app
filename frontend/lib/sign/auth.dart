@@ -23,6 +23,7 @@ class _AutorizeState extends State<Authorize> {
   void initState() {
     super.initState();
     Metrica.screenOpen("Auth");
+    Metrica.loginStart();
   }
 
 

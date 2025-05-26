@@ -50,6 +50,7 @@ class _DialoguePageState extends State<DialoguePage> {
 
   void _showLeftSideMenu() {
     _scaffoldKey.currentState?.openDrawer();
+    Metrica.navigationMenuUsed();
   }
 
   Widget _buildMenuButton(String text, String route) {

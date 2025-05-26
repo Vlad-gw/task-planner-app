@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
+import 'package:punctualis_1/api/metrica.dart';
 
 class ApiService {
   final Dio _dio = Dio();
@@ -54,11 +55,13 @@ class ApiService {
       );
 
       final token = response.data['access_token'];
+      Metrica.loginSuccess();
       if (savePassword) {
         await _storage.write(key: _tokenKey, value: token);
       }
       return token;
     } on DioException catch (e) {
+      Metrica.loginFail();
       throw Exception(e.response?.data['detail'] ?? 'Login failed');
     }
   }
