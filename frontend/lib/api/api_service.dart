@@ -94,4 +94,14 @@ class ApiService {
       throw Exception('Failed to fetch data: ${e.message}');
     }
   }
+
+
+  Future<Map<String, dynamic>> createTask() async {
+    try {
+      final response = await _dio.get('/Users/Get_all_users');
+      return response.data;
+    } on DioException catch (e) {
+      throw Exception('Failed to fetch data: ${e.message}');
+    }
+  }
 }

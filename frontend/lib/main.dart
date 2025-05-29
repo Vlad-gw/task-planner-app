@@ -40,6 +40,8 @@ class MyApp extends StatelessWidget {
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
 
+
+
   @override
   State<AuthWrapper> createState() => _AuthWrapperState();
 }
@@ -47,17 +49,23 @@ class AuthWrapper extends StatefulWidget {
 class _AuthWrapperState extends State<AuthWrapper> {
   final ApiService _apiService = ApiService();
 
+
+  @override
+  void initState() {
+    super.initState();
+    Metrica.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _apiService.isAuthenticated(),
       builder: (context, snapshot) {
-        Metrica.init();
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Splash();
         } else {
           if (snapshot.data == true) {
-            return const Calendar();
+            return const DialoguePage();
           } else {
             return const MainScreen();
           }

@@ -39,6 +39,10 @@ android {
     }
 }
 
+dependencies {
+    implementation("com.yandex.android:mobmetricalib:5.3.0")
+}
+
 flutter {
     source = "../.."
 }

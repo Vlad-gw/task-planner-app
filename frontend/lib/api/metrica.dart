@@ -24,7 +24,9 @@ abstract class Metrica {
   }
 
   static void screenOpen(String value) {
-    AppMetrica.reportEvent('Screen $value opened');
+    AppMetrica.reportEventWithMap('Screen opened', {
+      'screen_name': value
+    });
   }
 
   static void navigationMenuUsed() {
@@ -32,7 +34,9 @@ abstract class Metrica {
   }
 
   static void taskCreate(String value) {
-    AppMetrica.reportEvent('Task created: $value');
+    AppMetrica.reportEventWithMap('Task created', {
+      'name' : value
+    });
   }
 
 }
