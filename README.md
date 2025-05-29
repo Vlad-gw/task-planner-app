@@ -4,7 +4,7 @@
 <h2>🚀Релиз </h2>
 <ul>
 <li>
-<a href="https://github.com/Vlad-gw/task-planner-app/releases/tag/Frontend">Punctualis.apk</a>
+<a href="https://github.com/Vlad-gw/task-planner-app/releases/tag/v1.1">Punctualis.apk</a>
 </li>
 </ul>
 <h2>👥Команда</h2>
