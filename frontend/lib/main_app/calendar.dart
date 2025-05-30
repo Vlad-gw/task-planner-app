@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:punctualis_1/api/metrica.dart';
+import 'package:punctualis_1/widgets/custom_calendar.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -210,30 +211,14 @@ class _CalendarState extends State<Calendar> {
                 ),
                   child: Material(
                     color: Colors.transparent,
-                    child: TableCalendar(
-                      firstDay: DateTime.utc(2020, 1, 1),
-                      lastDay: DateTime.utc(2030, 12, 31),
-                      focusedDay: _focusedDay,
-                      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-                      onDaySelected: _onDaySelected,
-                      headerVisible: false,
-                      calendarStyle: CalendarStyle(
-                        outsideDaysVisible: false,
-                        selectedDecoration: BoxDecoration(
-                          color: themeColor,
-                          shape: BoxShape.circle,
-                        ),
-                        todayDecoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      headerStyle: HeaderStyle(
-                        formatButtonVisible: false,
-                        titleCentered: true,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
-                        ),
-                      ),
+                    child: CustomCalendar(
+                      initialDate: DateTime.now(),
+                      onDateSelected: (date) {
+                        print('Выбрана дата: $date');
+                        // Здесь можно добавить навигацию или другие действия
+                      },
+                      headerColor: Colors.blue,
+                      selectedColor: Colors.blueAccent,
                     ),
                   ),
               )
