@@ -188,64 +188,55 @@ class _CalendarState extends State<Calendar> {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: _showLeftSideMenu,
-        ),
         title: const Text("Punctualis"),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 236, 230, 240),
-        actions: [
-          PopupMenuButton<String>(
-            icon: Icon(Icons.more_vert),
-            onSelected: (value) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Выбрано: $value')),
-              );
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'settings',
-                child: Text('Настройки'),
-              ),
-              const PopupMenuItem<String>(
-                value: 'help',
-                child: Text('Помощь'),
-              ),
-            ],
-          ),
-        ],
+        backgroundColor: Color.fromARGB(255, 236, 230, 240)
       ),
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          margin: EdgeInsets.all(8),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 236, 230, 240),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(28),
           ),
           child: Column(
             children: [
-              TableCalendar(
-                firstDay: DateTime.utc(2020, 1, 1),
-                lastDay: DateTime.utc(2030, 12, 31),
-                focusedDay: _focusedDay,
-                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-                onDaySelected: _onDaySelected,
-                calendarStyle: CalendarStyle(
-                  selectedDecoration: BoxDecoration(
-                    color: themeColor,
-                    shape: BoxShape.circle,
-                  ),
-                  todayDecoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(28),
                 ),
-                headerStyle: HeaderStyle(
-                  formatButtonVisible: false,
-                  titleCentered: true,
-                ),
-              ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: TableCalendar(
+                      firstDay: DateTime.utc(2020, 1, 1),
+                      lastDay: DateTime.utc(2030, 12, 31),
+                      focusedDay: _focusedDay,
+                      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                      onDaySelected: _onDaySelected,
+                      headerVisible: false,
+                      calendarStyle: CalendarStyle(
+                        outsideDaysVisible: false,
+                        selectedDecoration: BoxDecoration(
+                          color: themeColor,
+                          shape: BoxShape.circle,
+                        ),
+                        todayDecoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      headerStyle: HeaderStyle(
+                        formatButtonVisible: false,
+                        titleCentered: true,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+                        ),
+                      ),
+                    ),
+                  ),
+              )
             ],
           ),
         ),

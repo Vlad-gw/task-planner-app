@@ -9,6 +9,7 @@ import 'package:punctualis_1/main_app/dialogue_page.dart';
 import 'package:punctualis_1/main_app/settings.dart';
 import 'package:punctualis_1/main_app/calendar.dart';
 import 'package:punctualis_1/api/api_service.dart';
+import 'package:punctualis_1/widgets/custom_calendar.dart';
 
 void main() => runApp(const MyApp());
 
@@ -65,7 +66,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
           return const Splash();
         } else {
           if (snapshot.data == true) {
-            return const DialoguePage();
+            return const CustomCalendar();
           } else {
             return const MainScreen();
           }
