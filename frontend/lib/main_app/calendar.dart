@@ -214,11 +214,8 @@ class _CalendarState extends State<Calendar> {
                     child: CustomCalendar(
                       initialDate: DateTime.now(),
                       onDateSelected: (date) {
-                        print('Выбрана дата: $date');
                         // Здесь можно добавить навигацию или другие действия
                       },
-                      headerColor: Colors.blue,
-                      selectedColor: Colors.blueAccent,
                     ),
                   ),
               )
