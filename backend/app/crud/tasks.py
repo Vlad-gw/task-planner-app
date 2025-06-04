@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-
 from backend.app.models.task import TaskDB
 from backend.app.models.tag import TagDB
 from backend.app.models.tasklist import TaskListDB
@@ -7,6 +6,29 @@ from backend.app.models.tasktag import TaskTagDB
 from backend.app.models.user import UserDB
 from backend.app.schemas.taskcreate import TaskCreate
 from backend.app.schemas.taskupdate import TaskUpdate
+from backend.app.schemas.task import TaskFilter
+
+
+def get_tasks_by_filter(db: Session, filter: TaskFilter):
+    query = db.query(TaskDB)
+
+    query = query.join(TaskDB.task_lists).filter(
+        TaskListDB.user_id.in_(filter.user_ids)
+    )
+
+    if filter.priority is not None:
+        query = query.filter(TaskDB.priority == filter.priority)
+
+    if filter.is_done is not None:
+        query = query.filter(TaskDB.is_done == filter.is_done)
+
+    if filter.min_creation_date is not None:
+        query = query.filter(TaskDB.creation_date >= filter.min_creation_date)
+
+    if filter.max_creation_date is not None:
+        query = query.filter(TaskDB.creation_date <= filter.max_creation_date)
+
+    return query.distinct().all()
 
 
 def add_tag_to_task(db: Session, task_id: int, tag_id: int):

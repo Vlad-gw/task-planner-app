@@ -1,11 +1,15 @@
 from pydantic import BaseModel, Field
 
 
-class Message(BaseModel):
-    id: int = Field(..., ge=1, description="Идентификатор сообщения")
-    message: str = Field(..., min_length=1, description="Текст сообщения")
-    user_id: int = Field(..., ge=1, description="Идентификатор пользователя")
+class MessageRequest(BaseModel):
+    message: str = Field(..., min_length=1)
 
 
-class Config:
-    from_attributes = True
+class MessageResponse(BaseModel):
+    id: int
+    message: str
+    user_id: int
+    sent_at: int
+
+    class Config:
+        from_attributes = True
