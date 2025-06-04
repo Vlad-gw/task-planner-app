@@ -32,7 +32,7 @@
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/Roadmap.pdf">Roadmap pdf</a></li>    
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/Diagrams.pdf">Диаграммы</a></li>
     <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/SchemeAPI.json">Схема API</a></li>
-    <li><a href="https://github.com/Vlad-gw/task-planner-app">Курсовой проект </a>(скоро)</li>
+    <li><a href="https://github.com/Vlad-gw/task-planner-app/blob/main/documentation/%D0%9A%D1%83%D1%80%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0.pdf">Курсовой проект </a></li>
 </ul>
 <h2>📽Презентация проекта</h2>
 <ul>
