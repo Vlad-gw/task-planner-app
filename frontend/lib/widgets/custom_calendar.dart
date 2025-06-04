@@ -102,7 +102,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             itemCount: _getDaysInMonth() + _getFirstWeekdayOfMonth(),
             itemBuilder: (context, index) {
               if (index < _getFirstWeekdayOfMonth()) {
-                return Container(); // Пустые клетки в начале
+                return Container();
               }
               final day = index - _getFirstWeekdayOfMonth() + 1;
               final date = DateTime(
