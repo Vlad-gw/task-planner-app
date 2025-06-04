@@ -18,7 +18,7 @@ class TabPage extends StatelessWidget {
         itemCount: 1,
         itemBuilder: (context, index) {
           return TabPageListItem(
-           task: Task(title: 'lolo', description: 'description', priority: 1, creationDate: 15645, finishDate: 4546456, isDone: true, timeReminder: 4564564, scheduledAt: 44846)
+           task: Task(title: 'Помыть посуду', description: 'description', priority: 1, creationDate: 15645, finishDate: 4546456, isDone: true, timeReminder: 4564564, scheduledAt: 44846)
           );
         },
       ),

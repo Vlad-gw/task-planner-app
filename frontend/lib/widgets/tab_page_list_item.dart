@@ -19,8 +19,8 @@ class TabPageListItem extends StatelessWidget {
             Image.asset('assets/icons/edit.png'),
             Image.asset('assets/icons/delete.png'),
             Container(
-              width: 48,
-              height: 48,
+              width: 36,
+              height: 36,
               padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
                 color: Colors.red,

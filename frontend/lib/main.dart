@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/api/metrica.dart';
+import 'package:punctualis_1/main_app/create_task.dart';
 import 'package:punctualis_1/main_app/splash.dart';
 import 'package:punctualis_1/sign/auth.dart';
 import 'package:punctualis_1/sign/register.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/sttgs': (context) => const Settings(),
         '/calend': (context) => const Calendar(),
         '/splash': (context) => const Splash(),
+        '/create_task' : (context) => const CreateTask()
       },
     );
   }

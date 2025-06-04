@@ -7,7 +7,6 @@ import 'package:punctualis_1/styles/colors.dart';
 import 'package:punctualis_1/controllers/tab_bar_controller.dart';
 import 'package:punctualis_1/utils/json_handler.dart';
 import 'package:punctualis_1/api/api_service.dart';
-import 'package:json5/json5.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -37,7 +36,6 @@ class _CalendarState extends State<Calendar> {
       print(task.title);
     }
   }
-
 
   Widget _buildMenuButton(String text, String route) {
     return Padding(
@@ -239,8 +237,16 @@ class _CalendarState extends State<Calendar> {
                     ),
                   ),
                   child: TabBarController(
-                    tabScreens: [TabPage(title: '1', count: 1,), TabPage(title: '2', count: 2,), TabPage(title: '3', count: 3)],
-                    tabs: [Tab(text: 'Мои планы'), Tab(text: 'В процессе'), Tab(text: 'Завершено')],
+                    tabScreens: [
+                      TabPage(title: '1', count: 1),
+                      TabPage(title: '2', count: 2),
+                      TabPage(title: '3', count: 3),
+                    ],
+                    tabs: [
+                      Tab(text: 'Мои планы'),
+                      Tab(text: 'В процессе'),
+                      Tab(text: 'Завершено'),
+                    ],
                   ),
                 ),
               ),
@@ -248,6 +254,13 @@ class _CalendarState extends State<Calendar> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create_task');
+        },
+        child: Image.asset('assets/icons/add.png'),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

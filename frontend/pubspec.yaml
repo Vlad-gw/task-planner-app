@@ -78,6 +78,7 @@ flutter:
     - assets/icons/filter.png
     - assets/icons/delete.png
     - assets/icons/edit.png
+    - assets/icons/add.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
