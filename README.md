@@ -22,6 +22,7 @@
 <a href="https://www.langchain.com/"><img src="https://i.ibb.co/x0hHg9L/langchain-icon.png" alt="" align="center" hspace="10" style="margin-bottom: 4px">LangChain - ИИ</a> </br>
 <a href="https://firebase.google.com/"><img src="https://i.ibb.co/m51pcGjz/firebase-icon.png" alt="" align="center" hspace=10 style="margin-bottom: 10px">Firebase - Уведомления</a> </br>
 <a href="https://assistproject.atlassian.net/jira/software/projects/SCRUM/summary?atlOrigin=eyJpIjoiNzg5MGE1MzZjOTNhNDg1NDkxZWViOWI2YTUzZGJiMmYiLCJwIjoiaiJ9"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10" style="margin-bottom: 10px">Jira - Управление проектом</a> </br>
+<a href="https://id.atlassian.com/invite/p/jira-software?id=ZNmH4m52RQmg3ILrBW_kCA"><img src="https://i.ibb.co/cc3DkwdZ/jira-1-fotor-2025032624334.png" alt="" align="center" hspace="10" style="margin-bottom: 10px">Jira - Вторая ссылка(при проблеме подключения)</a> </br>
 <a href="https://www.reg.ru/"><img src="https://i.ibb.co/KcK8vvQd/3dfd240e52eed8865ecf930c966f15f8.jpg" alt="" align="center" hspace="10" style="width: 5%; height: 5%; margin-bottom: 8px">рег.ру - Сервер</a> </br>
 <a href="https://supabase.com/"><img src="https://i.ibb.co/KBNZN9h/68747470733a2f2f6b696e677368756b2e76657263656c2e6170702f49636f6e732f73757061626173652e706e67.png" alt="" align="center" hspace="10" style="width: 5%; height: 5%; margin-bottom: 4px">Supabase - БД</a> </br>
 <h2>📄Документация</h2>
