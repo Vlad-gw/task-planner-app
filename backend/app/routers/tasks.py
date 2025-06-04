@@ -2,7 +2,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from backend.app.crud.tasks import create_task, get_tasks, update_task, delete_task, get_all_tasks, add_tag_to_task, \
-    get_tasks_by_filter
+    get_tasks_by_filter, get_user_tasks
 from backend.app.db.session import get_db
 from backend.app.schemas.task import Task, TaskFilter
 from backend.app.schemas.taskcreate import TaskCreate
@@ -42,6 +42,22 @@ def read_task(id: int = Query(..., description="ID task, required field"),
               user_id: Optional[int] = Query(None, description="ID user, optional field"),
               db: Session = Depends(get_db)):
     return get_tasks(db, id=id, user_id=user_id)
+
+
+@router.get("/Get_user_tasks", response_model=List[Task])
+def get_user_tasks_endpoint(
+        db: Session = Depends(get_db),
+        current_user: UserDB = Depends(get_current_user)
+):
+    return get_user_tasks(db, current_user.id)
+
+
+@router.get("/Get_user_tasks_by_id", response_model=List[Task])
+def get_user_tasks_by_id_endpoint(
+        user_id: int = Query(..., description="ID пользователя, обязательное поле"),
+        db: Session = Depends(get_db)
+):
+    return get_user_tasks(db, user_id)
 
 
 @router.post("/Create_task", response_model=Task)

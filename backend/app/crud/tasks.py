@@ -88,6 +88,19 @@ def get_tasks(db: Session, **filters):
         return []
 
 
+def get_user_tasks(db: Session, user_id: int):
+    try:
+        return (
+            db.query(TaskDB)
+            .join(TaskListDB, TaskDB.id == TaskListDB.task_id)
+            .filter(TaskListDB.user_id == user_id)
+            .all()
+        )
+    except Exception as e:
+        print(f"Error retrieving tasks for user {user_id}: {e}")
+        return []
+
+
 def update_task(db: Session, id: int, task_data: TaskUpdate):
     db_task = db.query(TaskDB).filter(TaskDB.id == id).first()
     if db_task:
