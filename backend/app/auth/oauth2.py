@@ -12,7 +12,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/Auth/Login")
 
 SECRET_KEY = "super-secret-key"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 5256000
 
 
 def create_access_token(user_id: int, first_name: str, second_name: str, email: str, role: str = "user"):
