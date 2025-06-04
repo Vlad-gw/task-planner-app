@@ -205,36 +205,69 @@ class AIService:
     def generate_task_query_response(self, db: get_db, user_id: int, first_name: str, query: str) -> str:
         query_lower = query.lower()
 
-        if "самые важные" in query_lower or "высокий приоритет" in query_lower:
-            tasks = self._get_priority_tasks(db, user_id)
+        priority_keywords = [
+            "самые важные",
+            "высокий приоритет",
+            "самый высокий приоритет",
+            "задача с высоким приоритетом",
+            "важнейшие задачи",
+            "самая важная задача",
+            "какая важная задача",
+            "что самое важное"
+        ]
+
+        if any(keyword in query_lower for keyword in priority_keywords):
+            max_priority = db.query(func.max(TaskDB.priority)) \
+                .join(TaskListDB) \
+                .filter(TaskListDB.user_id == user_id) \
+                .scalar()
+
+            if not max_priority:
+                return f"{first_name}, у вас пока нет задач."
+
+            tasks = db.query(TaskDB) \
+                .join(TaskListDB) \
+                .filter(TaskListDB.user_id == user_id) \
+                .filter(TaskDB.priority == max_priority) \
+                .order_by(TaskDB.scheduled_at.asc()) \
+                .all()
+
             if not tasks:
                 return f"{first_name}, у вас нет задач с высоким приоритетом."
 
-            max_priority = tasks[0].priority
-            tasks_list = "\n".join(f"- {t.title}" for t in tasks)
-            return f"{first_name}, ваши самые важные задачи (приоритет {max_priority}):\n{tasks_list}"
+            if max_priority == 5:
+                priority_desc = "высший приоритет (5)"
+            else:
+                priority_desc = f"максимальный приоритет ({max_priority})"
 
-        elif "ближайшая" in query_lower:
-            task = self._get_nearest_task(db, user_id)
-            if not task:
-                return f"{first_name}, у вас нет предстоящих задач."
+            if len(tasks) == 1:
+                task = tasks[0]
+                time_str = datetime.fromtimestamp(task.scheduled_at).strftime(
+                    "%d.%m.%Y в %H:%M") if task.scheduled_at else "без указания даты"
+                return (f"{first_name}, ваша самая важная задача ({priority_desc}): "
+                        f"«{task.title}» на {time_str}")
+            else:
+                tasks_list = "\n".join(f"- {t.title}" for t in tasks)
+                return f"{first_name}, ваши самые важные задачи ({priority_desc}):\n{tasks_list}"
 
-            time_str = datetime.fromtimestamp(task.scheduled_at).strftime("%d.%m.%Y в %H:%M")
-            return f"{first_name}, ваша ближайшая задача: «{task.title}» на {time_str}, приоритет: {task.priority}"
-
-        elif "назначено на" in query_lower:
-            task_name = query.split("назначено на")[0].strip()
-            task = self._find_task_by_name(db, user_id, task_name)
-            if not task:
-                return f"{first_name}, задача «{task_name}» не найдена."
-
-            time_str = datetime.fromtimestamp(task.scheduled_at).strftime(
-                "%d.%m.%Y в %H:%M") if task.scheduled_at else "не указано"
-            return f"{first_name}, задача «{task.title}» назначена на {time_str}"
-
-        return f"{first_name}, я не понял ваш запрос о задачах."
+    def _get_all_user_tasks(self, db: get_db, user_id: int) -> list:
+        return db.query(TaskDB) \
+            .join(TaskListDB) \
+            .filter(TaskListDB.user_id == user_id) \
+            .order_by(TaskDB.priority.desc(), TaskDB.scheduled_at.asc()) \
+            .all()
 
     def _get_priority_tasks(self, db: get_db, user_id: int) -> list:
+        priority_5_tasks = db.query(TaskDB) \
+            .join(TaskListDB) \
+            .filter(TaskListDB.user_id == user_id) \
+            .filter(TaskDB.priority == 5) \
+            .order_by(TaskDB.scheduled_at.asc()) \
+            .all()
+
+        if priority_5_tasks:
+            return priority_5_tasks
+
         max_priority = db.query(func.max(TaskDB.priority)) \
             .join(TaskListDB) \
             .filter(TaskListDB.user_id == user_id) \
@@ -260,9 +293,23 @@ class AIService:
             .order_by(TaskDB.scheduled_at.asc()) \
             .first()
 
-    def _find_task_by_name(self, db: get_db, user_id: int, task_name: str):
+    def _find_task_by_name(self, db: get_db, user_id: int, task_name: str) -> list[TaskDB]:
+        if not task_name or len(task_name) < 2:
+            return []
+
+        words = task_name.split()
+        queries = []
+
+        for word in words:
+            if len(word) >= 2:
+                queries.append(TaskDB.title.ilike(f"%{word}%"))
+
+        if not queries:
+            return []
+
         return db.query(TaskDB) \
             .join(TaskListDB) \
             .filter(TaskListDB.user_id == user_id) \
-            .filter(TaskDB.title.ilike(f"%{task_name}%")) \
-            .first()
+            .filter(*queries) \
+            .order_by(TaskDB.priority.desc(), TaskDB.scheduled_at.asc()) \
+            .all()
