@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:punctualis_1/api/metrica.dart';
-import 'package:punctualis_1/main_app/dialogue_page.dart';
-import 'package:punctualis_1/main_app/splash.dart';
 import 'package:punctualis_1/main_app/tab_page.dart';
+import 'package:punctualis_1/structures/task.dart';
 import 'package:punctualis_1/widgets/custom_calendar.dart';
 import 'package:punctualis_1/styles/colors.dart';
 import 'package:punctualis_1/controllers/tab_bar_controller.dart';
+import 'package:punctualis_1/utils/json_handler.dart';
+import 'package:punctualis_1/api/api_service.dart';
+import 'package:json5/json5.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -18,14 +20,24 @@ class _CalendarState extends State<Calendar> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  ApiService apiService = ApiService();
 
-  Map<DateTime, List<String>> tasks = {};
+  List<Task> tasks = [];
 
   @override
   void initState() {
     super.initState();
     Metrica.screenOpen("Calendar");
+    loadData();
   }
+
+  Future<void> loadData() async {
+    tasks = await JSONHandler.parseTasks((await apiService.getUserTasks()));
+    for (var task in tasks) {
+      print(task.title);
+    }
+  }
+
 
   Widget _buildMenuButton(String text, String route) {
     return Padding(
@@ -63,7 +75,6 @@ class _CalendarState extends State<Calendar> {
   // Показываем меню задач
   void _showTaskMenu(DateTime day) {
     final dateKey = DateTime(day.year, day.month, day.day);
-    final dayTasks = tasks[dateKey] ?? [];
 
     showModalBottomSheet(
       context: context,
@@ -79,10 +90,10 @@ class _CalendarState extends State<Calendar> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: dayTasks.length,
+                  itemCount: tasks.length,
                   itemBuilder:
                       (context, index) =>
-                          ListTile(title: Text(dayTasks[index])),
+                          ListTile(title: Text(tasks[index].title)),
                 ),
               ),
               ElevatedButton.icon(
@@ -121,11 +132,6 @@ class _CalendarState extends State<Calendar> {
                   final taskText = taskController.text.trim();
                   if (taskText.isNotEmpty) {
                     setState(() {
-                      if (tasks.containsKey(dateKey)) {
-                        tasks[dateKey]!.add(taskText);
-                      } else {
-                        tasks[dateKey] = [taskText];
-                      }
                       Metrica.taskCreate(taskText);
                     });
                     Navigator.pop(context);
@@ -233,8 +239,8 @@ class _CalendarState extends State<Calendar> {
                     ),
                   ),
                   child: TabBarController(
-                    tabScreens: [TabPage(title: '1', count: 1,), TabPage(title: '2', count: 2,)],
-                    tabs: [Tab(text: 'lololo'), Tab(text: 'llili',)],
+                    tabScreens: [TabPage(title: '1', count: 1,), TabPage(title: '2', count: 2,), TabPage(title: '3', count: 3)],
+                    tabs: [Tab(text: 'Мои планы'), Tab(text: 'В процессе'), Tab(text: 'Завершено')],
                   ),
                 ),
               ),

@@ -104,4 +104,19 @@ class ApiService {
       throw Exception('Failed to fetch data: ${e.message}');
     }
   }
+
+  Future<List<dynamic>> getUserTasks() async {
+    try {
+      final token = await _storage.read(key: _tokenKey);
+      final response = await _dio.get(
+        '/Tasks/Get_user_tasks',
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+      print('lololo');
+      print(response.runtimeType);
+      return response.data;
+    } on DioException catch (e) {
+      throw Exception('Failed to fetch data: ${e.message}');
+    }
+  }
 }
