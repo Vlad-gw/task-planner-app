@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 
 class Task(BaseModel):
@@ -13,5 +13,24 @@ class Task(BaseModel):
     time_reminder: Optional[int] = Field(None, description="Время напоминания (формат UNIX timestamp)")
     scheduled_at: Optional[int] = Field(None, description="Запланированное время выполнения (формат UNIX timestamp)")
 
-    class Config:
-        from_attributes = True
+
+class TaskFilter(BaseModel):
+    user_ids: List[int]
+    task_ids: Optional[List[int]] = None
+    priority: Optional[int] = None
+    is_done: Optional[bool] = None
+    min_creation_date: Optional[int] = None
+    max_creation_date: Optional[int] = None
+
+
+class TaskDetails(BaseModel):
+    title: str = Field(..., min_length=1, max_length=50)
+    description: Optional[str] = Field(None)
+    priority: Optional[int] = Field(None, ge=1, le=5)
+    scheduled_at: Optional[int] = Field(None, description="UNIX timestamp")
+    finish_date: Optional[int] = Field(None, description="UNIX timestamp")
+    time_reminder: Optional[int] = Field(None, description="UNIX timestamp")
+
+
+class Config:
+    from_attributes = True

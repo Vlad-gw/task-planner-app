@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import OAuth2PasswordBearer
 
+from backend.app.ai import routers as ai_routers
 from backend.app.auth import routers as auth_routers
 from backend.app.routers import (
     users, tasks, tags,
@@ -36,6 +37,7 @@ app.include_router(tasks.router, prefix="/Tasks", tags=["Tasks"])
 app.include_router(tags.router, prefix="/Tags", tags=["Tags"])
 app.include_router(verification_codes.router, prefix="/Verification_codes", tags=["Verification_codes"])
 app.include_router(auth_routers.router)
+app.include_router(ai_routers.router)
 
 
 def custom_openapi() -> Dict[str, Any]:

@@ -9,4 +9,5 @@ class MessageDB(Base):
 
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True, index=True, autoincrement=True)
     message: Mapped[str] = mapped_column(Text)
-    user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("users.id"))
+    user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("punctualis.users.id"))
+    sent_at: Mapped[int] = mapped_column(BigInteger)

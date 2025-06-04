@@ -1,15 +1,29 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from backend.app.crud.tasks import create_task, get_tasks, update_task, delete_task, get_all_tasks, add_tag_to_task
+from backend.app.crud.tasks import create_task, get_tasks, update_task, delete_task, get_all_tasks, add_tag_to_task, \
+    get_tasks_by_filter
 from backend.app.db.session import get_db
-from backend.app.schemas.task import Task
+from backend.app.schemas.task import Task, TaskFilter
 from backend.app.schemas.taskcreate import TaskCreate
 from backend.app.schemas.taskupdate import TaskUpdate
 from backend.app.auth.oauth2 import get_current_user
 from backend.app.models.user import UserDB
 
 router = APIRouter()
+
+
+@router.post("/filter")
+async def filter_tasks(
+        filter: TaskFilter,
+        db: Session = Depends(get_db),
+        current_user=Depends(get_current_user)
+):
+    if not filter.user_ids:
+        filter.user_ids = [current_user.id]
+
+    tasks = get_tasks_by_filter(db, filter)
+    return tasks
 
 
 @router.post("/Add_tag_to_task")
