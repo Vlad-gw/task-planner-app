@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:punctualis_1/api/metrica.dart';
+import 'package:punctualis_1/main_app/dialogue_page.dart';
+import 'package:punctualis_1/main_app/splash.dart';
+import 'package:punctualis_1/main_app/tab_page.dart';
 import 'package:punctualis_1/widgets/custom_calendar.dart';
+import 'package:punctualis_1/styles/colors.dart';
+import 'package:punctualis_1/controllers/tab_bar_controller.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -15,9 +19,7 @@ class _CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
-
   Map<DateTime, List<String>> tasks = {};
-
 
   @override
   void initState() {
@@ -25,7 +27,7 @@ class _CalendarState extends State<Calendar> {
     Metrica.screenOpen("Calendar");
   }
 
-    Widget _buildMenuButton(String text, String route) {
+  Widget _buildMenuButton(String text, String route) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: ElevatedButton(
@@ -78,9 +80,9 @@ class _CalendarState extends State<Calendar> {
               Expanded(
                 child: ListView.builder(
                   itemCount: dayTasks.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(dayTasks[index]),
-                  ),
+                  itemBuilder:
+                      (context, index) =>
+                          ListTile(title: Text(dayTasks[index])),
                 ),
               ),
               ElevatedButton.icon(
@@ -102,38 +104,39 @@ class _CalendarState extends State<Calendar> {
     final TextEditingController taskController = TextEditingController();
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Новая задача'),
-        content: TextField(
-          controller: taskController,
-          decoration: InputDecoration(hintText: 'Введите задачу'),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Отмена'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final taskText = taskController.text.trim();
-              if (taskText.isNotEmpty) {
-                setState(() {
-                  if (tasks.containsKey(dateKey)) {
-                    tasks[dateKey]!.add(taskText);
-                  } else {
-                    tasks[dateKey] = [taskText];
-                  }
-                  Metrica.taskCreate(taskText);
-                });
-                Navigator.pop(context);
+      builder:
+          (context) => AlertDialog(
+            title: Text('Новая задача'),
+            content: TextField(
+              controller: taskController,
+              decoration: InputDecoration(hintText: 'Введите задачу'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Отмена'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  final taskText = taskController.text.trim();
+                  if (taskText.isNotEmpty) {
+                    setState(() {
+                      if (tasks.containsKey(dateKey)) {
+                        tasks[dateKey]!.add(taskText);
+                      } else {
+                        tasks[dateKey] = [taskText];
+                      }
+                      Metrica.taskCreate(taskText);
+                    });
+                    Navigator.pop(context);
 
-                _showTaskMenu(dateKey);
-              }
-            },
-            child: Text('Добавить'),
+                    _showTaskMenu(dateKey);
+                  }
+                },
+                child: Text('Добавить'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -191,7 +194,7 @@ class _CalendarState extends State<Calendar> {
         automaticallyImplyLeading: false,
         title: const Text("Punctualis"),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 236, 230, 240)
+        backgroundColor: Color.fromARGB(255, 236, 230, 240),
       ),
       body: SafeArea(
         child: Container(
@@ -207,18 +210,34 @@ class _CalendarState extends State<Calendar> {
               Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(28),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(28),
+                    topRight: Radius.circular(28),
+                  ),
                 ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: CustomCalendar(
-                      initialDate: DateTime.now(),
-                      onDateSelected: (date) {
-                        // Здесь можно добавить навигацию или другие действия
-                      },
+                child: Material(
+                  color: Colors.transparent,
+                  child: CustomCalendar(
+                    initialDate: DateTime.now(),
+                    onDateSelected: (date) {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: CustomColors.white.color,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(28),
+                      bottomRight: Radius.circular(28),
                     ),
                   ),
-              )
+                  child: TabBarController(
+                    tabScreens: [TabPage(title: '1', count: 1,), TabPage(title: '2', count: 2,)],
+                    tabs: [Tab(text: 'lololo'), Tab(text: 'llili',)],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
