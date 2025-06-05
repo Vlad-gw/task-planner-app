@@ -1,14 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:punctualis_1/api/api_service.dart';
 import 'package:punctualis_1/api/metrica.dart';
-
-class Message {
-  final String text;
-  final String time;
-  final bool isUser;
-
-  Message({required this.text, required this.time, required this.isUser});
-}
+import 'package:punctualis_1/structures/message.dart';
+import 'package:punctualis_1/utils/json_handler.dart';
 
 class DialoguePage extends StatefulWidget {
   const DialoguePage({super.key});
@@ -18,10 +15,10 @@ class DialoguePage extends StatefulWidget {
 }
 
 class _DialoguePageState extends State<DialoguePage> {
+  bool isLoading = false;
   final List<Message> messages = [];
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
 
   @override
   void initState() {
@@ -29,22 +26,30 @@ class _DialoguePageState extends State<DialoguePage> {
     Metrica.screenOpen("DialoguePage");
   }
 
-  void _sendMessage() {
-    final text = _controller.text;
-    if (text.isNotEmpty) {
-      final now = DateFormat('HH:mm').format(DateTime.now());
-      setState(() {
-        messages.add(Message(text: text, time: now, isUser: true));
-        messages.add(
-          Message(
-            text:
-                "Здравствуйте, наш ии ассистент ещё находится в разработке, скоро эта функция появится в работе",
-            time: now,
-            isUser: false,
-          ),
+  Future<void> _sendMessage() async {
+    try {
+      print('started');
+      ApiService apiService = ApiService();
+      final text = _controller.text;
+      if (text.isNotEmpty) {
+        final now = DateFormat('HH:mm').format(DateTime.now());
+        Message request = Message(text: text, time: now, isUser: true);
+        messages.add(request);
+        setState(() => isLoading = true);
+        String answer = await JSONHandler.parseMessage(
+          await apiService.sendMessage(request),
         );
-      });
-      _controller.clear();
+        setState(() {
+          messages.add(Message(text: answer, time: now, isUser: false));
+          _controller.clear();
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() => isLoading = false);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Ошибка: $e')));
     }
   }
 
@@ -101,8 +106,7 @@ class _DialoguePageState extends State<DialoguePage> {
                     ),
                     child: Row(
                       children: [
-                        Image(image: AssetImage("assets/avatar1.png"),
-                        ),
+                        Image(image: AssetImage("assets/avatar1.png")),
                         Text(
                           "Имя Фамилия",
                           style: TextStyle(
@@ -119,15 +123,6 @@ class _DialoguePageState extends State<DialoguePage> {
               _buildMenuButton('Календарь', '/calend'),
               _buildMenuButton('Аналитика', '/sttgs'),
               _buildMenuButton('Настройки', '/sttgs'),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Версия 0.5.0',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
             ],
           ),
         ),
@@ -256,12 +251,16 @@ class _DialoguePageState extends State<DialoguePage> {
                       ),
                     ),
                   ),
-                  IconButton(
-                    icon: CustomPaint(
-                      size: Size(24, 24),
-                      painter: TrianglePainter(color: theme.primaryColor),
+                  TextButton(
+                    onPressed: () {
+                      print('pressed');
+                      _sendMessage();
+                    },
+                    child: Image.asset(
+                      'assets/icons/send.png',
+                      width: 32,
+                      height: 32,
                     ),
-                    onPressed: _sendMessage,
                   ),
                 ],
               ),
@@ -271,32 +270,4 @@ class _DialoguePageState extends State<DialoguePage> {
       ),
     );
   }
-}
-
-class TrianglePainter extends CustomPainter {
-  final Color color;
-  TrianglePainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paintFill =
-        Paint()
-          ..color = Colors.transparent
-          ..style = PaintingStyle.fill;
-    final paintBorder =
-        Paint()
-          ..color = const Color.fromARGB(255, 78, 76, 76)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2;
-    final path = Path();
-    path.moveTo(0, 0);
-    path.lineTo(size.width, size.height / 2);
-    path.lineTo(0, size.height);
-    path.close();
-    canvas.drawPath(path, paintFill);
-    canvas.drawPath(path, paintBorder);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

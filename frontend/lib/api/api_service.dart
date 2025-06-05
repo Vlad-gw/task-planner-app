@@ -2,34 +2,41 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:punctualis_1/api/metrica.dart';
+import 'package:punctualis_1/main_app/dialogue_page.dart';
 import 'package:punctualis_1/structures/task.dart';
+import 'package:punctualis_1/structures/message.dart';
 
 class ApiService {
-  final Dio _dio = Dio();
+  final Dio _dio = Dio(
+    BaseOptions(
+      connectTimeout: Duration(seconds: 30),
+      receiveTimeout: Duration(seconds: 30),
+    ),
+  );
   final String _baseUrl = 'http://194.58.126.4:8080/';
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
   final String _tokenKey = 'jwt_token';
 
   ApiService() {
     _dio.options.baseUrl = _baseUrl;
-    _dio.options.connectTimeout = const Duration(seconds: 5);
-    _dio.options.receiveTimeout = const Duration(seconds: 3);
     _dio.interceptors.add(LogInterceptor(responseBody: true));
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        final token = await _storage.read(key: _tokenKey);
-        if (token != null) {
-          options.headers['Authorization'] = 'Bearer $token';
-        }
-        return handler.next(options);
-      },
-      onError: (DioException e, handler) async {
-        if (e.response?.statusCode == 401) {
-          await _storage.delete(key: _tokenKey);
-        }
-        return handler.next(e);
-      },
-    ));
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await _storage.read(key: _tokenKey);
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          return handler.next(options);
+        },
+        onError: (DioException e, handler) async {
+          if (e.response?.statusCode == 401) {
+            await _storage.delete(key: _tokenKey);
+          }
+          return handler.next(e);
+        },
+      ),
+    );
   }
 
   Future<String?> getToken() async {
@@ -41,18 +48,16 @@ class ApiService {
     return token != null;
   }
 
-  Future<String?> login(String email, String password,
-      bool savePassword) async {
+  Future<String?> login(
+    String email,
+    String password,
+    bool savePassword,
+  ) async {
     try {
       final response = await _dio.post(
         '/Auth/Login',
-        data: jsonEncode({
-          'email': email,
-          'password': password,
-        }),
-        options: Options(
-          contentType: Headers.jsonContentType,
-        ),
+        data: jsonEncode({'email': email, 'password': password}),
+        options: Options(contentType: Headers.jsonContentType),
       );
 
       final token = response.data['access_token'];
@@ -67,8 +72,12 @@ class ApiService {
     }
   }
 
-  Future<void> register(String firstName, String secondName, String email,
-      String password) async {
+  Future<void> register(
+    String firstName,
+    String secondName,
+    String email,
+    String password,
+  ) async {
     try {
       await _dio.post(
         '/Auth/Registration',
@@ -76,11 +85,9 @@ class ApiService {
           'first_name': firstName,
           'second_name': secondName,
           'email': email,
-          'password': password
+          'password': password,
         }),
-        options: Options(
-          contentType: Headers.jsonContentType,
-        ),
+        options: Options(contentType: Headers.jsonContentType),
       );
     } on DioException catch (e) {
       throw Exception(e.response?.data['detail'] ?? 'Registration failed');
@@ -96,7 +103,6 @@ class ApiService {
     }
   }
 
-
   Future<void> createTask(Task task) async {
     try {
       await _dio.post(
@@ -109,11 +115,9 @@ class ApiService {
           "finish_date": task.finishDate,
           'is_done': false,
           'time_reminder': task.timeReminder,
-          'scheduled_at': task.scheduledAt
+          'scheduled_at': task.scheduledAt,
         }),
-        options: Options(
-          contentType: Headers.jsonContentType,
-        ),
+        options: Options(contentType: Headers.jsonContentType),
       );
     } on DioException catch (e) {
       throw Exception(e.response?.data['detail'] ?? 'Creating task failed');
@@ -127,11 +131,30 @@ class ApiService {
         '/Tasks/Get_user_tasks',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-      print('lololo');
-      print(response.runtimeType);
       return response.data;
     } on DioException catch (e) {
       throw Exception('Failed to fetch data: ${e.message}');
+    }
+  }
+
+  Future<Map<String, dynamic>> sendMessage(Message message) async {
+    try {
+      final token = await _storage.read(key: _tokenKey);
+      final response = await _dio.post(
+        '/Chat/',
+        data: jsonEncode({'message': message.text}),
+        options: Options(
+          contentType: Headers.jsonContentType,
+          headers: {'Authorization': 'Bearer $token'},
+          receiveTimeout: Duration(seconds: 10),
+        ),
+      );
+      print('1');
+      print(response.data);
+      print(response.data.runtimeType);
+      return response.data;
+    } on DioException catch (e) {
+      throw Exception(e.response?.data['detail'] ?? 'Sending message failed');
     }
   }
 }
