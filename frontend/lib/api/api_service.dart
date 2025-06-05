@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:punctualis_1/api/metrica.dart';
+import 'package:punctualis_1/structures/task.dart';
 
 class ApiService {
   final Dio _dio = Dio();
@@ -96,12 +97,26 @@ class ApiService {
   }
 
 
-  Future<Map<String, dynamic>> createTask() async {
+  Future<void> createTask(Task task) async {
     try {
-      final response = await _dio.get('/Users/Tasks/Create_task');
-      return response.data;
+      await _dio.post(
+        '/Tasks/Create_task',
+        data: jsonEncode({
+          'title': task.title,
+          'description': task.description,
+          'priority': task.priority,
+          'creation_date': task.creationDate,
+          "finish_date": task.finishDate,
+          'is_done': false,
+          'time_reminder': task.timeReminder,
+          'scheduled_at': task.scheduledAt
+        }),
+        options: Options(
+          contentType: Headers.jsonContentType,
+        ),
+      );
     } on DioException catch (e) {
-      throw Exception('Failed to fetch data: ${e.message}');
+      throw Exception(e.response?.data['detail'] ?? 'Creating task failed');
     }
   }
 
