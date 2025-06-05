@@ -14,6 +14,14 @@ class _CreateTask extends State<CreateTask> {
   double sliderValue = 3;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  ApiService apiService = ApiService();
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,6 @@ class _CreateTask extends State<CreateTask> {
                     ),
                     child: TextField(
                       controller: _titleController,
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: 'Название задачи',
                         border: InputBorder.none,
@@ -55,7 +62,6 @@ class _CreateTask extends State<CreateTask> {
                     ),
                     child: TextField(
                       controller: _descriptionController,
-                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         hintText: 'Описание задачи (опционально)',
                         border: InputBorder.none,
@@ -314,7 +320,9 @@ class _CreateTask extends State<CreateTask> {
                       style: TextStyle(color: CustomColors.white.color),
                     ),
                     onPressed: () {
-                      // Task task = Task(title: , description: description, priority: priority, creationDate: creationDate, finishDate: finishDate, isDone: isDone, timeReminder: timeReminder, scheduledAt: scheduledAt)
+                      print(_descriptionController.text);
+                      Task task = Task(title: _titleController.text, description: _descriptionController.text, priority: sliderValue.toInt(), creationDate: 0, finishDate: 0, isDone: false, timeReminder: 0, scheduledAt: 0);
+                      apiService.createTask(task);
                     },
                   ),
                 ),
@@ -333,7 +341,9 @@ class _CreateTask extends State<CreateTask> {
                       'Закрыть',
                       style: TextStyle(color: CustomColors.purple.color),
                     ),
-                    onPressed: () {Navigator.pop(context);},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ),
