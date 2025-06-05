@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:punctualis_1/structures/task.dart';
 import 'package:punctualis_1/widgets/tab_page_list_item.dart';
 class TabPage extends StatelessWidget {
-  final String title;
-  final int count;
+  List<Task> tasks;
 
-  const TabPage({
+  TabPage({
     super.key,
-    required this.title,
-    required this.count,
+    required this.tasks,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: 1,
+        itemCount: tasks.length,
         itemBuilder: (context, index) {
-          return TabPageListItem(
-           task: Task(title: 'Помыть посуду', description: 'description', priority: 1, creationDate: 15645, finishDate: 4546456, isDone: true, timeReminder: 4564564, scheduledAt: 44846)
-          );
+          if (tasks.isNotEmpty) {
+            return TabPageListItem(
+                task: tasks[index]);
+          }
         },
       ),
     );

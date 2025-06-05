@@ -10,13 +10,13 @@ class Task {
 
   Task({
     required this.title,
-    required this.description,
-    required this.priority,
-    required this.creationDate,
-    required this.finishDate,
-    required this.isDone,
-    required this.timeReminder,
-    required this.scheduledAt,
+    this.description,
+    this.priority,
+    this.creationDate,
+    this.finishDate,
+    this.isDone = false,
+    this.timeReminder,
+    this.scheduledAt,
   });
 
 

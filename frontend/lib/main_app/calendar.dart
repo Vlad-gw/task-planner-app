@@ -238,9 +238,9 @@ class _CalendarState extends State<Calendar> {
                   ),
                   child: TabBarController(
                     tabScreens: [
-                      TabPage(title: '1', count: 1),
-                      TabPage(title: '2', count: 2),
-                      TabPage(title: '3', count: 3),
+                      TabPage(tasks: tasks,),
+                      TabPage(tasks: [],),
+                      TabPage(tasks: [],),
                     ],
                     tabs: [
                       Tab(text: 'Мои планы'),

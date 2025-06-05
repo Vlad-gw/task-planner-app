@@ -14,7 +14,11 @@ class TabPageListItem extends StatelessWidget {
         padding: EdgeInsets.all(12.0),
         child: Row(
           children: [
-            Checkbox(value: task.isDone, onChanged: (bool? value) {}),
+            Checkbox(
+              value: task.isDone ?? false,
+              onChanged: (bool? newValue) {
+              },
+            ),
             Expanded(child: Text(task.title)),
             Image.asset('assets/icons/edit.png'),
             Image.asset('assets/icons/delete.png'),
